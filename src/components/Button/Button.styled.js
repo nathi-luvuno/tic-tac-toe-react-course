@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ButtonWrapper = styled.button`
   padding: 20px 30px;
-  background-color: ${(props) => props.theme.colors.secondary};
+  background-color: ${(props) => props.color ? props.color : props.theme.colors.secondary};
   color: ${(props) => props.theme.colors.primary};
   cursor: pointer;
   min-width: 300px;
