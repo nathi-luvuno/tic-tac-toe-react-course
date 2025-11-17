@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { CellStyle } from "./GameCell.styled";
 import { GameContext } from "../../contexts/GameContext";
 import { checkForWinner } from "../../utils/GameUtils";
@@ -15,35 +15,29 @@ function GameCell({ cellItem, index }) {
 
   const cellClickHandler = () => {
     updateBoard(index);
-    const result = checkForWinner(game.board)
-    if(result) {
-      roundComplete()
+
+    const result = checkForWinner([...game.board.slice(0, index), game.turn, ...game.board.slice(index + 1)]);
+
+    if (result) {
+      roundComplete(result);
       handleModal(<RoundOverModal />);
     }
   };
 
-  useEffect(() => {
-  const result = checkForWinner(game.board);
-  if (result) {
-    roundComplete();
-    handleModal(<RoundOverModal />);
-  }
-  }, [game.board]);
-
   if (cellItem === "x") {
     return (
       <CellStyle>
-        <IconX className='markedItem'/>
+        <IconX className="markedItem" />
       </CellStyle>
     );
   } else if (cellItem === "o") {
     return (
       <CellStyle>
-        <IconO className='markedItem'/>
+        <IconO className="markedItem" />
       </CellStyle>
     );
   }
-  
+
   return (
     <CellStyle onClick={cellClickHandler}>
       {game.turn === "x" ? (

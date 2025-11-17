@@ -24,7 +24,12 @@ export const ModalContainer = styled.div`
   align-items: center;
   color: ${(props) => props.theme.colors.primary};
   background-color: ${(props) => props.theme.colors.secondary};
-`
+
+  ${(props) => props.theme.media.mobile} {
+    min-width: 200px;
+    padding: 20px 10px;
+  }
+`;
 
 export const ModalHeader = styled.div`
   display: flex;
